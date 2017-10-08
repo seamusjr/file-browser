@@ -1,7 +1,6 @@
 define(function(require) {
 
 	var fileBrowser = function() {
-		window.console.log('loading filebrowser...');
 
 		var fileList = [],
 			$fileAttachmentsList = $('.file-collection').find('ul'),
@@ -30,7 +29,7 @@ define(function(require) {
 				$fileAttachmentsList.append('<li><span class="thumbnail" style="background-image:url('+bgImg+')"></span><span class="file-name">'+ file.name +'</span>\t<span class="file-size">Size: '+ file.size +'K</span><span class="destroy">X</span></li>');
 			}
 			else {
-				$fileAttachmentsList.append('<li><span class="thumbnail"></span><span class="file-name">'+ file.name +'</span>\t<span class="file-size">Size: '+ file.size +'K</span><span class="destroy">X</span></li>');
+				$fileAttachmentsList.append('<li><span class="thumbnail"><i class="fa fa-file"></i></span><span class="file-name">'+ file.name +'</span>\t<span class="file-size">Size: '+ file.size +'K</span><span class="destroy">X</span></li>');
 			}
 			destroyFileListItem();
 			// window.console.log("createFileListItem:", fileList.length, fileList);

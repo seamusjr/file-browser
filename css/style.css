@@ -69,6 +69,23 @@ html {
 		width: 50px;
 		background-position: center;
 		margin: 0.5rem;
+		position: relative;
+	}
+
+	.thumbnail .fa.fa-file {
+		font: normal normal normal 14px/1 FontAwesome;
+		font-size: inherit;
+		text-rendering: auto;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	}
+
+	.thumbnail .fa.fa-file:before {
+		content: "\f15b";
+		position: absolute;
+		font-size: 2rem;
+		top: -6px;
+		left: 7px;
 	}
 
 	.file-name,
