@@ -1,95 +1,144 @@
 html {
-		font-family: Arial, sans-serif;
-		font-size: 16px;
-	}
-	
-	body {
-		padding: 0 1rem;
-	}
+	font-family: Arial, sans-serif;
+	font-size: 16px;
+}
 
-	#holder {
-		border: 10px dashed #ccc;
-		width: 100%;
-		height: 300px;
-		margin: 20px auto;
-	}
+body {
+	padding: 0 1rem;
+}
 
-	#holder.hover {
-		border: 10px dashed #333;
+@media screen and (max-width : 767px) {
+	article {
+		font-size: 0.875rem;
 	}
+}
 
-	.destroy {
-		background-color: #fff;
-		border: 1px solid #333;
-		padding: 0.5rem 1rem;
-		height: 1.25rem;
-		width: 1rem;
-		margin: 0.5rem;
-		text-align: center;
-		border-radius: 0.3rem;
-		font-size: 1.2rem;
-		margin-top: 0.875rem;
-	}
+#holder {
+	border: 10px dashed #ccc;
+	width: 100%;
+	height: 300px;
+	margin: 20px auto;
+}
 
-	.destroy:hover {
-		color: red;
-		cursor: pointer;
-	}
+#holder.hover {
+	border: 10px dashed #333;
+}
 
-	.file-collection {
-		width: 520px;
-	}
+.destroy {
+	background-color: #fff;
+	border: 1px solid #333;
+	padding: 0.5rem 1rem;
+	height: 1.25rem;
+	width: 1rem;
+	margin: 0.5rem;
+	text-align: center;
+	border-radius: 0.3rem;
+	font-size: 1.2rem;
+	margin-top: 0.875rem;
+	position: absolute;
+	right: 1.75rem;
+}
 
-	.file-collection ul {
-		margin: 0;
-		padding: 0;
-	}
+.destroy:hover {
+	color: red;
+	cursor: pointer;
+}
 
-	.file-collection ul li {
-		display: flex;
-		flex-direction: row;
-		border-left: 1px solid #333;
-		border-right: 1px solid #333;
-		border-top: 1px solid #333;
-		min-height: 1.5rem;
-		overflow: hidden;
-		margin: 0;
-		padding: 0;
-	}
+.grid .destroy {
+	padding: 0.5rem;
+	position: absolute;
+	top: 8px;
+	right: 0;
+	margin-top: 0;
+}
 
-	.file-collection ul li:last-of-type {
-		border-bottom: 1px solid #333;
-	}
+.file-collection ul {
+	margin: 0;
+	padding: 0;
+}
 
-	.thumbnail {
-		background-repeat: no-repeat;
-		background-size: auto 100%;
-		display: inline-block;
-		height: 50px;
-		width: 50px;
-		background-position: center;
-		margin: 0.5rem;
-		position: relative;
-	}
+.file-collection ul.grid {
+	display: -webkit-flex;
+	display: flex;
+	-webkit-flex-direction: row;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
 
-	.thumbnail .fa.fa-file {
-		font: normal normal normal 14px/1 FontAwesome;
-		font-size: inherit;
-		text-rendering: auto;
-		-webkit-font-smoothing: antialiased;
-		-moz-osx-font-smoothing: grayscale;
-	}
+.file-collection ul li {
+	border-left: 1px solid #333;
+	border-right: 1px solid #333;
+	border-top: 1px solid #333;
+	min-height: 1.5rem;
+	overflow: hidden;
+	margin: 0;
+	padding: 0;
+}
 
-	.thumbnail .fa.fa-file:before {
-		content: "\f15b";
-		position: absolute;
-		font-size: 2rem;
-		top: -6px;
-		left: 7px;
-	}
+.file-collection ul.grid li {
+	border: none;
+	width: 24%;
+	box-sizing: border-box;
+	position: relative;
+	border: 1px solid black;
+	margin-left: 1px;
+	margin-bottom: 1px;
+}
 
-	.file-name,
-	.file-size {
-		min-width: 200px;
-		padding: 1.5rem 0 0 0;
-	}
+.file-collection ul li:last-of-type {
+	border-bottom: 1px solid #333;
+}
+
+.thumbnail {
+	background-repeat: no-repeat;
+	background-size: auto 100%;
+	display: inline-block;
+	height: 50px;
+	width: 50px;
+	background-position: center;
+	margin: 0.5rem;
+	position: relative;
+}
+
+.thumbnail .fa.fa-file {
+	font: normal normal normal 14px/1 FontAwesome;
+	font-size: inherit;
+	text-rendering: auto;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.thumbnail .fa.fa-file:before {
+	content: "\f15b";
+	position: absolute;
+	font-size: 2rem;
+	top: -6px;
+	left: 7px;
+}
+
+.file-name,
+.file-type,
+.file-size {
+	padding: 1.5rem 0.5rem 0 0;
+}
+
+.file-name {
+	min-width: 35%;
+}
+
+.file-type,
+.file-size {
+	min-width: 20%;
+}
+
+.grid .file-name,
+.grid .file-type,
+.grid .file-size{
+	display: block;
+	padding: 0 0 0.25rem 0.25rem;
+	min-width: auto;
+}
+
+/*.toggle-grid {
+	display: none;
+}*/

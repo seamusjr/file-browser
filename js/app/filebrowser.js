@@ -9,10 +9,28 @@ define(function(require) {
 
 		if (typeof window.FileReader === 'undefined') {
 			state.className = 'fail';
-		} else {
+		}
+		else {
 			state.className = 'success';
 			state.innerHTML = 'File API & FileReader available';
 		}
+
+		function toggleGridOrListView() {
+			$('.toggle-grid').on('click', function(e) {
+				e.preventDefault();
+				var $collection = $('.file-collection > ul');
+				$collection.toggleClass('grid');
+
+				if ($collection.hasClass('grid')) {
+					$('.toggle-grid > span').html('list');
+				}
+				else {
+					$('.toggle-grid > span').html('grid');
+				}
+			});
+		}
+
+		toggleGridOrListView();
 
 		function destroyFileListItem(){
 			$('.destroy').on('click', function(e) {
@@ -26,17 +44,13 @@ define(function(require) {
 			fileList.push(file);
 
 			if (bgImg != null) {
-				$fileAttachmentsList.append('<li><span class="thumbnail" style="background-image:url('+bgImg+')"></span><span class="file-name">'+ file.name +'</span>\t<span class="file-size">Size: '+ file.size +'K</span><span class="destroy">X</span></li>');
+				$fileAttachmentsList.append('<li><span class="thumbnail" style="background-image:url('+bgImg+')"></span><span class="file-name">'+ file.name + '</span>\t<span class="file-type">'+ file.type +'</span>\t<span class="file-size">Size: '+ file.size +'K</span><span class="destroy">X</span></li>');
 			}
 			else {
-				$fileAttachmentsList.append('<li><span class="thumbnail"><i class="fa fa-file"></i></span><span class="file-name">'+ file.name +'</span>\t<span class="file-size">Size: '+ file.size +'K</span><span class="destroy">X</span></li>');
+				$fileAttachmentsList.append('<li><span class="thumbnail"><i class="fa fa-file"></i></span><span class="file-name">'+ file.name +'</span>\t<span class="file-type">'+ file.type +'</span>\t<span class="file-size">Size: '+ file.size +'K</span><span class="destroy">X</span></li>');
 			}
 			destroyFileListItem();
-			// window.console.log("createFileListItem:", fileList.length, fileList);
-			window.console.log('bgImg: ', bgImg);
 		}
-
-
 
 		holder.ondragover = function() { this.className = 'hover'; return false; };
 		holder.ondragend = function() { this.className = ''; return false; };
@@ -48,8 +62,8 @@ define(function(require) {
 				fileType = file["type"],
 				validImageTypes = ["image/gif", "image/jpeg", "image/png"],
 				reader = new FileReader();
+
 			reader.onload = function(event) {
-				console.log("eeee: ",event.target);
 				holder.style.background = 'url(' + event.target.result + ') no-repeat center';
 				var bgImg = event.target.result;
 
@@ -61,11 +75,11 @@ define(function(require) {
 				createFileListItem(file, bgImg);
 
 			};
-			//console.log(file_list.length, file_list);
 			reader.readAsDataURL(file);
 
 			return false;
 		};
+
 	};
 
 	fileBrowser();
