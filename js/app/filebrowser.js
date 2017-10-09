@@ -1,3 +1,5 @@
+"use strict";
+
 define(function(require) {
 
 	var fileBrowser = function() {
@@ -5,14 +7,26 @@ define(function(require) {
 		var fileList = [],
 			$fileAttachmentsList = $('.file-collection').find('ul'),
 			holder = document.getElementById('holder'),
-			state = document.getElementById('status');
+			state = document.getElementById('status'),
+			fileUploader = document.getElementById('file-upload'),
+			totalFileSize = 0;
+
+		var setTotalFileSize = function() {
+			$('.total').html(totalFileSize);
+		};
+
+		var sum = function(arr, prop) {
+			return arr.reduce(function(a, b) {
+				return a + b[prop];
+			}, 0);
+		};
 
 		if (typeof window.FileReader === 'undefined') {
 			state.className = 'fail';
 		}
 		else {
 			state.className = 'success';
-			state.innerHTML = 'File API & FileReader available';
+			state.innerHTML = 'File API &amp; FileReader available';
 		}
 
 		function toggleGridOrListView() {
@@ -30,13 +44,13 @@ define(function(require) {
 			});
 		}
 
-		toggleGridOrListView();
-
 		function destroyFileListItem(){
 			$('.destroy').on('click', function(e) {
 				var index = $(e.target).parent('li').index();
 				$(e.target).parent('li').detach();
 				fileList.splice(index, 1);
+				totalFileSize = sum(fileList, 'size');
+				setTotalFileSize();
 			});
 		}
 
@@ -49,7 +63,12 @@ define(function(require) {
 			else {
 				$fileAttachmentsList.append('<li><span class="thumbnail"><i class="fa fa-file"></i></span><span class="file-name">'+ file.name +'</span>\t<span class="file-type">'+ file.type +'</span>\t<span class="file-size">Size: '+ file.size +'K</span><span class="destroy">X</span></li>');
 			}
+
+			totalFileSize = sum(fileList, 'size');
+
+			setTotalFileSize();
 			destroyFileListItem();
+			window.console.log(fileList);
 		}
 
 		holder.ondragover = function() { this.className = 'hover'; return false; };
@@ -64,7 +83,6 @@ define(function(require) {
 				reader = new FileReader();
 
 			reader.onload = function(event) {
-				holder.style.background = 'url(' + event.target.result + ') no-repeat center';
 				var bgImg = event.target.result;
 
 				if ($.inArray(fileType, validImageTypes) < 0) {
@@ -80,6 +98,39 @@ define(function(require) {
 			return false;
 		};
 
+		function uploadImageViaForm() {
+			function handleFileSelect(e) {
+				var file = e.target.files[0], // FileList object
+					fileType = file["type"],
+					validImageTypes = ["image/gif", "image/jpeg", "image/png"],
+					reader = new FileReader();
+
+				reader.onload = function(event) {
+					var bgImg = event.target.result;
+
+					if ($.inArray(fileType, validImageTypes) < 0) {
+						bgImg = null;
+					}
+
+					createFileListItem(file, bgImg);
+
+				};
+				reader.readAsDataURL(file);
+
+				// return false;
+			}
+
+			document.getElementById('file-upload').addEventListener('change', handleFileSelect, false);
+
+		}
+
+		var init = function() {
+			uploadImageViaForm();
+			setTotalFileSize();
+			toggleGridOrListView();
+		};
+		
+		init();
 	};
 
 	fileBrowser();

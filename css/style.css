@@ -90,14 +90,15 @@ body {
 }
 
 .thumbnail {
+	background-position: center;
 	background-repeat: no-repeat;
 	background-size: auto 100%;
-	display: inline-block;
+	display: block;
+	float:left;
 	height: 50px;
-	width: 50px;
-	background-position: center;
 	margin: 0.5rem;
 	position: relative;
+	width: 50px;
 }
 
 .thumbnail .fa.fa-file {
@@ -119,7 +120,8 @@ body {
 .file-name,
 .file-type,
 .file-size {
-	padding: 1.5rem 0.5rem 0 0;
+	display: inline-block;
+	margin: 1.5rem 0.5rem 0.5rem 0;
 }
 
 .file-name {
@@ -139,6 +141,7 @@ body {
 	min-width: auto;
 }
 
-/*.toggle-grid {
-	display: none;
-}*/
+.grid .thumbnail {
+	clear:both;
+	float:none;
+}

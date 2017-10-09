@@ -12,8 +12,10 @@
 		<div id="holder"></div>
 		<p id="status">File API &amp; FileReader API not supported</p>
 		<p>Drag an image or file from your desktop into the the drop zone above.</p>
+		<p>OR, upload using form below</p>
+		<input type="file" name="files[]" id="file-upload" multiple="">
 
-		<p>[<a href="#" class="toggle-grid">Show as <span>list</span></a>]</p>
+		<p>[<a href="#" class="toggle-grid">Show as <span class="show-as">list</span></a>]| Total Size: <span class="total"></span>K</p>
 		<div class="file-collection">
 			<ul class="grid"></ul>
 		</div>
